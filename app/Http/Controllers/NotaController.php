@@ -44,7 +44,10 @@ class NotaController extends Controller
     {
         $nota = new Nota();
         $nota->nombre = $request->nombre;
-        $nota->descripcion = $request->descripcion;
+        $nota->numero = $request->numero;
+        $nota->descripcion = $request->descripcion;        
+        $nota->precio = $request->precio;
+        $nota->total = $request->total;
         $nota->user_id = auth()->id();
         $nota->save();
 

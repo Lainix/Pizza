@@ -4,9 +4,15 @@
     <form @submit.prevent="agregar" >
       <h3>Agregar Pedido ʕ•́ᴥ•̀ʔっ</h3>
       <input type="text" class="form-control mb-2" 
-        placeholder="Nombre del pedido" v-model="nota.nombre">
+        placeholder="Nombre" v-model="nota.nombre">
+        <input type="text" class="form-control mb-2" 
+        placeholder="Numero de Pedido" v-model="nota.numero">
       <input type="text" class="form-control mb-2" 
-        placeholder="Ingredientes" v-model="nota.descripcion">
+        placeholder="Tamaño" v-model="nota.descripcion">
+      <input type="text" class="form-control mb-2" 
+        placeholder="Precio" v-model="nota.precio"> 
+      <input type="text" class="form-control mb-2" 
+        placeholder="Total" v-model="nota.total"> 
       <button class="btn btn-primary" type="submit">Agregar</button>
     </form>
     <hr>
@@ -18,7 +24,10 @@
             {{item.updated_at}}
           </span>
           <p>{{item.nombre}}</p>
-          <p>{{item.descripcion}}</p>      
+          <p>{{item.numero}}</p>
+          <p>{{item.descripcion}}</p>            
+          <p>{{item.precio}}</p>
+          <p>{{item.total}}</p>    
         </li>
     </ul>
   </div>
@@ -30,7 +39,7 @@ export default {
     return {
       notas: [],
       modoEditar: false,
-      nota: {nombre: '', descripcion: ''},
+      nota: {nombre: '', numero: '', descripcion: '', precio: '', total: ''},
     }
   },
   created(){
@@ -40,17 +49,23 @@ export default {
   },
   methods:{
     agregar(){
-      if(this.nota.nombre.trim() === '' || this.nota.descripcion.trim() === ''){
+      if(this.nota.nombre.trim() === '' || this.nota.numero.trim() === '' || this.nota.descripcion.trim() === '' || this.nota.precio.trim() === '' || this.nota.total.trim() === ''){
         alert('Debes completar todos los campos antes de guardar');
         return;
       }
-      console.log(this.nota.nombre , this.nota.descripcion);
+      console.log(this.nota.nombre , this.nota.numero , this.nota.descripcion , this.nota.precio , this.nota.total);
         const params = {
         nombre: this.nota.nombre,
-        descripcion: this.nota.descripcion
+        numero: this.nota.numero,
+        descripcion: this.nota.descripcion,
+        precio: this.nota.precio,
+        total: this.nota.total
     }   
     this.nota.nombre = '';
+    this.nota.numero = '';
     this.nota.descripcion = '';
+    this.nota.precio = '';
+    this.nota.total = '';
       
       axios.post('/notas', params)
         .then((res) =>{

@@ -11,6 +11,9 @@ Para iniciar necesitamos:
 
 
 ***
+Descargamos los modulos con el comando:
+>npm i
+
 Se require un server usamos el comando:
 >php artisan serve
 

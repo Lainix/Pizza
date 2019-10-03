@@ -1899,6 +1899,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1906,7 +1915,10 @@ __webpack_require__.r(__webpack_exports__);
       modoEditar: false,
       nota: {
         nombre: '',
-        descripcion: ''
+        numero: '',
+        descripcion: '',
+        precio: '',
+        total: ''
       }
     };
   },
@@ -1921,18 +1933,24 @@ __webpack_require__.r(__webpack_exports__);
     agregar: function agregar() {
       var _this2 = this;
 
-      if (this.nota.nombre.trim() === '' || this.nota.descripcion.trim() === '') {
+      if (this.nota.nombre.trim() === '' || this.nota.numero.trim() === '' || this.nota.descripcion.trim() === '' || this.nota.precio.trim() === '' || this.nota.total.trim() === '') {
         alert('Debes completar todos los campos antes de guardar');
         return;
       }
 
-      console.log(this.nota.nombre, this.nota.descripcion);
+      console.log(this.nota.nombre, this.nota.numero, this.nota.descripcion, this.nota.precio, this.nota.total);
       var params = {
         nombre: this.nota.nombre,
-        descripcion: this.nota.descripcion
+        numero: this.nota.numero,
+        descripcion: this.nota.descripcion,
+        precio: this.nota.precio,
+        total: this.nota.total
       };
       this.nota.nombre = '';
+      this.nota.numero = '';
       this.nota.descripcion = '';
+      this.nota.precio = '';
+      this.nota.total = '';
       axios.post('/notas', params).then(function (res) {
         _this2.notas.push(res.data);
       });
@@ -37307,7 +37325,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control mb-2",
-          attrs: { type: "text", placeholder: "Nombre del pedido" },
+          attrs: { type: "text", placeholder: "Nombre" },
           domProps: { value: _vm.nota.nombre },
           on: {
             input: function($event) {
@@ -37324,12 +37342,34 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
+              value: _vm.nota.numero,
+              expression: "nota.numero"
+            }
+          ],
+          staticClass: "form-control mb-2",
+          attrs: { type: "text", placeholder: "Numero de Pedido" },
+          domProps: { value: _vm.nota.numero },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.nota, "numero", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
               value: _vm.nota.descripcion,
               expression: "nota.descripcion"
             }
           ],
           staticClass: "form-control mb-2",
-          attrs: { type: "text", placeholder: "Ingredientes" },
+          attrs: { type: "text", placeholder: "Tamaño" },
           domProps: { value: _vm.nota.descripcion },
           on: {
             input: function($event) {
@@ -37337,6 +37377,50 @@ var render = function() {
                 return
               }
               _vm.$set(_vm.nota, "descripcion", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.nota.precio,
+              expression: "nota.precio"
+            }
+          ],
+          staticClass: "form-control mb-2",
+          attrs: { type: "text", placeholder: "Precio" },
+          domProps: { value: _vm.nota.precio },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.nota, "precio", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.nota.total,
+              expression: "nota.total"
+            }
+          ],
+          staticClass: "form-control mb-2",
+          attrs: { type: "text", placeholder: "Total" },
+          domProps: { value: _vm.nota.total },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.nota, "total", $event.target.value)
             }
           }
         }),
@@ -37364,7 +37448,13 @@ var render = function() {
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(item.nombre))]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(item.descripcion))])
+          _c("p", [_vm._v(_vm._s(item.numero))]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(item.descripcion))]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(item.precio))]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(item.total))])
         ])
       }),
       0
